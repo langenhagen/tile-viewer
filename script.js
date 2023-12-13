@@ -73,9 +73,21 @@ document.addEventListener("wheel", (e) => {
   const background = document.querySelector(".background");
   const currentBackgroundSize = getComputedStyle(background).backgroundSize.split(" ");
   const currentBackgroundSizeX = parseFloat(currentBackgroundSize[0].replace("px", ""));
+  const currentBackgroundSizeY = parseFloat(currentBackgroundSize[1].replace("px", ""));
   const newBackgroundSizeX = currentBackgroundSizeX * scaleChange;
+  const newBackgroundSizeY = currentBackgroundSizeY * scaleChange;
+  background.style.backgroundSize = `${newBackgroundSizeX}px ${newBackgroundSizeY}px`;
 
-  background.style.backgroundSize = `${newBackgroundSizeX}px auto`;
+  // Zoom around mouse as center point
+  const offsetX = e.clientX - background.offsetLeft;
+  const offsetY = e.clientY - background.offsetTop;
+  const currentBackgroundPosition = getComputedStyle(background).backgroundPosition.split(" ");
+  const currentBackgroundPositionX = parseFloat(currentBackgroundPosition[0].replace("px", ""));
+  const currentBackgroundPositionY = parseFloat(currentBackgroundPosition[1].replace("px", ""));
+  const scaledPositionX = (currentBackgroundPositionX - offsetX) * scaleChange + offsetX;
+  const scaledPositionY = (currentBackgroundPositionY - offsetY) * scaleChange + offsetY;
+  background.style.backgroundPositionX = `${scaledPositionX}px`;
+  background.style.backgroundPositionY = `${scaledPositionY}px`;
 });
 
 // Change background file.
