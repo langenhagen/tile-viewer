@@ -7,6 +7,9 @@ let initialMouseX;
 let initialMouseY;
 let originalImageWidth;
 let originalImageHeight;
+let imagesDescriptions = [];
+let imagesData = [];
+let currentImageIndex = 0;
 
 // Reset image to its original size.
 function resetToOriginalSize() {
@@ -16,7 +19,7 @@ function resetToOriginalSize() {
   }
 }
 
-// Load an image.
+// Load an image file to get its dimensions.
 function loadImage(imagePath) {
   return new Promise((resolve) => {
     const img = new Image();
@@ -29,12 +32,29 @@ function loadImage(imagePath) {
   });
 }
 
+// Show the image in the specified direction (1 for next, -1 for previous).
+function showImage(direction) {
+  if (imagesData.length === 0) {
+    return;
+  }
+
+  currentImageIndex = (currentImageIndex + direction + imagesData.length) % imagesData.length;
+  const newImageData = imagesData[currentImageIndex];
+  const background = document.querySelector(".background");
+  background.style.backgroundImage = `url("${newImageData}")`;
+  loadImage(newImageData);
+  resetToOriginalSize();
+  const file = imagesDescriptions[currentImageIndex];
+  document.getElementById("current-file-info").textContent = file.name;
+}
+
 // Set the initial image from the CSS file.
 document.addEventListener("DOMContentLoaded", () => {
   const initialImagePath = "default.jpg";
   loadImage(initialImagePath);
   resetToOriginalSize();
   document.querySelector(".background").style.backgroundImage = `url(${initialImagePath})`;
+  document.getElementById("current-file-info").textContent = initialImagePath;
 });
 
 document.querySelector(".background").addEventListener("mousedown", (e) => {
@@ -94,26 +114,39 @@ document.addEventListener("wheel", (e) => {
 // Change background file.
 document.getElementById("file-input").addEventListener("change", async (e) => {
   const fileInput = e.target;
-  const selectedFile = fileInput.files[0];
+  imagesDescriptions = fileInput.files;
+  document.getElementById("current-file-info").textContent = imagesDescriptions[0].name;
 
-  if (selectedFile) {
+  imagesData = [];
+  currentImageIndex = 0;
+
+  for (const file of imagesDescriptions) {
     const reader = new FileReader();
+
     reader.onload = async function (event) {
-      const newImagePath = event.target.result;
-      await loadImage(newImagePath);
-      document.querySelector(".background").style.backgroundImage = `url(${newImagePath})`;
-      resetToOriginalSize();
+      const imageData = event.target.result;
+      await loadImage(imageData);
+      imagesData.push(imageData);
+      if (imagesData.length === imagesDescriptions.length) {
+        document.querySelector(".background").style.backgroundImage =
+          `url(${imagesData[currentImageIndex]})`;
+        resetToOriginalSize();
+      }
     };
 
-    reader.readAsDataURL(selectedFile);
+    reader.readAsDataURL(file);
   }
 });
 
 // Keyboard shortcut listener.
 document.addEventListener("keydown", (e) => {
-  if (e.ctrlKey && e.key === "o") {
-    document.getElementById("file-input").click();
-  } else if (e.ctrlKey && e.key === "0") {
-    resetToOriginalSize();
+  if (e.key === "o") {
+    document.getElementById("file-input").click(); // Open File Dialog
+  } else if (e.key === "0") {
+    resetToOriginalSize(); // Reset to original size
+  } else if (e.key === "ArrowRight" || e.key.toLowerCase() === "k") {
+    showImage(1); // Next image
+  } else if (e.key === "ArrowLeft" || e.key.toLowerCase() === "j") {
+    showImage(-1); // Previous image
   }
 });

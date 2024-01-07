@@ -10,10 +10,12 @@ Find the webapp under https://langenhagen.github.io/tile-viewer.
 
 
 ## Usage
-Press the "open" button or press `ctrl + o` to choose a file.  
-Click and drag the mouse to pan.  
-Use mouse wheel to zoom.  
-Press `ctrl+0` to reset zoom to image original size.
+- Click the "open" button or press `o` to choose a file. You can select and load several files.
+- Click and drag the mouse to pan.
+- Use mouse wheel to zoom.
+- Press `0` to reset zoom to image original size.
+- Click "Prev Image" or press the left arrow key or `j` to show the previous file.
+- Click "Next Image" or press the right arrow key or `k` to show the next file.
 
 
 ## License

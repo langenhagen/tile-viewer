@@ -12,7 +12,10 @@
     <title>Tiled Image Viewer</title>
   </head>
   <body>
-    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" />
+    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple />
+    <button onclick="showImage(-1)">Prev Image</button>
+    <button onclick="showImage(1)">Next Image</button>
+    <span id="current-file-info"></span>
     <script src="script.js" defer></script>
     <div class="background"></div>
   </body>
