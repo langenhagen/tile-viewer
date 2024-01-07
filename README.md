@@ -16,6 +16,7 @@ Find the webapp under https://langenhagen.github.io/tile-viewer.
 - Press `0` to reset zoom to image original size.
 - Click "Prev Image" or press the left arrow key or `j` to show the previous file.
 - Click "Next Image" or press the right arrow key or `k` to show the next file.
+- Click the "📋" button or press `c` or `y` to copy the current file's name.
 
 
 ## License

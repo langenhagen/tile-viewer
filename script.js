@@ -148,5 +148,15 @@ document.addEventListener("keydown", (e) => {
     showImage(1); // Next image
   } else if (e.key === "ArrowLeft" || e.key.toLowerCase() === "j") {
     showImage(-1); // Previous image
+  } else if (e.key.toLowerCase() === "c" || e.key.toLowerCase() === "y") {
+    copyFileNameToClipboard(); // Copy file name
   }
 });
+
+// Copy the content of the `current-file-info` span to the clipboard.
+function copyFileNameToClipboard() {
+  const textToCopy = document.getElementById("current-file-info").textContent;
+  navigator.clipboard.writeText(textToCopy).catch((error) => {
+    console.error("Unable to copy to clipboard:", error);
+  });
+}
