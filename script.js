@@ -1,6 +1,7 @@
-// Image loading, mouse panning and zooming functionality as well as
-// file keyboard shortcut functionality.
-
+/**
+ * Image loading, mouse panning and zooming functionality as well as
+ * file keyboard shortcut functionality.
+ */
 let isDragging = false;
 let initialMouseX;
 let initialMouseY;
