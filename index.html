@@ -13,6 +13,7 @@
   </head>
   <body>
     <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple />
+    <button id="list-button" onclick="toggleImageList()">📜</button>
     <button onclick="showImage(-1)">Prev Image</button>
     <button onclick="showImage(1)">Next Image</button>
     <button onclick="copyFileNameToClipboard()">📋</button>
@@ -20,8 +21,15 @@
     <span id="current-file-info"></span>
     <div class="background"></div>
 
+    <!-- Image List Content (Initially Hidden)-->
+    <div id="list-modal" class="modal-content">
+      <strong>Currently Loaded Images:</strong>
+      <ul id="image-list"></ul>
+      <button onclick="toggleImageList()">Close</button>
+    </div>
+
     <!-- Help Content (Initially Hidden) -->
-    <div id="help-content" class="help-content">
+    <div id="help-modal" class="modal-content">
       <strong>Usage:</strong>
       <ul>
         <li>
@@ -30,6 +38,7 @@
         </li>
         <li>Click and drag the mouse to pan.</li>
         <li>Use mouse wheel to zoom.</li>
+        <li>Click "📜" or press 'l' to toggle the file list.</li>
         <li>Press '0' to reset to the original size.</li>
         <li>Click "Prev Image" or press '←' or 'j' to view the previous image.</li>
         <li>Click "Next Image" or press '→' or 'k' to view the next image.</li>

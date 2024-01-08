@@ -39,7 +39,7 @@ input[type="file"]:hover {
   right: 0px;
 }
 
-.help-content {
+.modal-content {
   display: none;
   position: fixed;
   top: 50%;
@@ -50,7 +50,7 @@ input[type="file"]:hover {
   padding: 20px;
 }
 
-.help-content button {
+.modal-content button {
   background-color: #2e86df;
   border: 2px solid #2e86df;
   color: white;
@@ -58,11 +58,17 @@ input[type="file"]:hover {
   cursor: pointer;
 }
 
-.help-content button:hover {
+.modal-content button:hover {
   background-color: #1f65c9;
   border: 2px solid #1f65c9;
 }
 
-.help-content ul li {
+.modal-content ul li {
   margin-bottom: 10px;
+}
+
+#image-list {
+  max-height: 70vh; /* Set a maximum height for the list to fit within the modal */
+  overflow-y: auto; /* Enable vertical scrolling for the list */
+  font-size: 14px;
 }
