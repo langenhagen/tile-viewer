@@ -13,9 +13,9 @@
   </head>
   <body>
     <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple title="Choose Files" />
-    <button id="list-button" onclick="toggleImageList()" title="Toggle Image File List">📜</button>
-    <button onclick="showImage(-1)" title="Previous Image">Prev Image</button>
-    <button onclick="showImage(1)" title="Next Image">Next Image</button>
+    <button id="list-button" onclick="toggleImageList()" title="Toggle Image File List">📄</button>
+    <button onclick="showImage(-1)" title="Previous Image">🡄</button>
+    <button onclick="showImage(1)" title="Next Image">🡆</button>
     <button onclick="copyFileNameToClipboard()" title="Copy File Name">📋</button>
     <button id="help-button" onclick="toggleHelp()" title="Toggle Help">?</button>
     <span id="current-file-info" title="Current File name"></span>
@@ -38,10 +38,10 @@
         </li>
         <li>Click and drag the mouse to pan.</li>
         <li>Use mouse wheel to zoom.</li>
-        <li>Click "📜" or press 'l' to toggle the file list.</li>
+        <li>Click "📄" or press 'l' to toggle the file list.</li>
         <li>Press '0' to reset to the original size.</li>
-        <li>Click "Prev Image" or press '←' or 'j' to view the previous image.</li>
-        <li>Click "Next Image" or press '→' or 'k' to view the next image.</li>
+        <li>Click "🡄" or press '←' or 'j' to view the previous image.</li>
+        <li>Click "🡆" or press '→' or 'k' to view the next image.</li>
         <li>Click "📋" or press 'c' or 'y' to copy the current file name to the clipboard.</li>
         <li>Click "?" or press '?' to toggle the help.</li>
       </ul>
