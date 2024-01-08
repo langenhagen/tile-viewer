@@ -179,9 +179,9 @@ document.getElementById("file-input").addEventListener("change", async (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "?") {
     toggleHelp(); // Toggle help on "?" key press
-  } else if (e.key === "o") {
+  } else if (e.key.toLowerCase() === "o") {
     document.getElementById("file-input").click(); // Open file dialog
-  } else if (e.key === "l") {
+  } else if (e.key.toLowerCase() === "l") {
     toggleImageList(); // Toggle file list
   } else if (e.key === "0") {
     resetToOriginalSize(); // Reset to original size
