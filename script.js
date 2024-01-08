@@ -48,6 +48,16 @@ function showImage(direction) {
   document.getElementById("current-file-info").textContent = file.name;
 }
 
+// Function to toggle the visibility of the help modal.
+function toggleHelp() {
+  const helpContent = document.getElementById("help-content");
+  if (helpContent.style.display === "block") {
+    helpContent.style.display = "none";
+  } else {
+    helpContent.style.display = "block";
+  }
+}
+
 // Set the initial image from the CSS file.
 document.addEventListener("DOMContentLoaded", () => {
   const initialImagePath = "default.jpg";
@@ -140,7 +150,9 @@ document.getElementById("file-input").addEventListener("change", async (e) => {
 
 // Keyboard shortcut listener.
 document.addEventListener("keydown", (e) => {
-  if (e.key === "o") {
+  if (e.key === "?") {
+    toggleHelp(); // Toggle help on "?" key press
+  } else if (e.key === "o") {
     document.getElementById("file-input").click(); // Open File Dialog
   } else if (e.key === "0") {
     resetToOriginalSize(); // Reset to original size
