@@ -3,6 +3,7 @@
  * file keyboard shortcut functionality.
  */
 let isDragging = false;
+let movementEnabled = true;
 let initialMouseX;
 let initialMouseY;
 let originalImageWidth;
@@ -48,9 +49,28 @@ function showImage(direction) {
   document.getElementById("current-file-info").textContent = file.name;
 }
 
+// Function to toggle the visibility of the image list modal and to populate it.
+function toggleImageList() {
+  const listContent = document.getElementById("list-modal");
+  if (listContent.style.display === "block") {
+    listContent.style.display = "none";
+    movementEnabled = true;
+  } else {
+    movementEnabled = false;
+    const imageList = document.getElementById("image-list");
+    imageList.innerHTML = "";
+    Array.from(imagesDescriptions).forEach((file) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = file.name;
+      imageList.appendChild(listItem);
+    });
+    listContent.style.display = "block";
+  }
+}
+
 // Function to toggle the visibility of the help modal.
 function toggleHelp() {
-  const helpContent = document.getElementById("help-content");
+  const helpContent = document.getElementById("help-modal");
   if (helpContent.style.display === "block") {
     helpContent.style.display = "none";
   } else {
@@ -79,6 +99,9 @@ document.addEventListener("mouseup", () => {
 
 // Panning functionality.
 document.addEventListener("mousemove", (e) => {
+  if (!movementEnabled) {
+    return;
+  }
   if (isDragging) {
     const deltaX = e.clientX - initialMouseX;
     const deltaY = e.clientY - initialMouseY;
@@ -98,6 +121,10 @@ document.addEventListener("mousemove", (e) => {
 
 // Zooming functionality.
 document.addEventListener("wheel", (e) => {
+  if (!movementEnabled) {
+    return;
+  }
+
   const delta = e.deltaY;
   const scaleChange = delta > 0 ? 1.1 : 0.9;
 
@@ -153,7 +180,9 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "?") {
     toggleHelp(); // Toggle help on "?" key press
   } else if (e.key === "o") {
-    document.getElementById("file-input").click(); // Open File Dialog
+    document.getElementById("file-input").click(); // Open file dialog
+  } else if (e.key === "l") {
+    toggleImageList(); // Toggle file list
   } else if (e.key === "0") {
     resetToOriginalSize(); // Reset to original size
   } else if (e.key === "ArrowRight" || e.key.toLowerCase() === "k") {
