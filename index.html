@@ -12,13 +12,13 @@
     <title>Tiled Image Viewer</title>
   </head>
   <body>
-    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple />
-    <button id="list-button" onclick="toggleImageList()">📜</button>
-    <button onclick="showImage(-1)">Prev Image</button>
-    <button onclick="showImage(1)">Next Image</button>
-    <button onclick="copyFileNameToClipboard()">📋</button>
-    <button id="help-button" onclick="toggleHelp()">?</button>
-    <span id="current-file-info"></span>
+    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple title="Choose Files" />
+    <button id="list-button" onclick="toggleImageList()" title="Toggle Image File List">📜</button>
+    <button onclick="showImage(-1)" title="Previous Image">Prev Image</button>
+    <button onclick="showImage(1)" title="Next Image">Next Image</button>
+    <button onclick="copyFileNameToClipboard()" title="Copy File Name">📋</button>
+    <button id="help-button" onclick="toggleHelp()" title="Toggle Help">?</button>
+    <span id="current-file-info" title="Current File name"></span>
     <div class="background"></div>
 
     <!-- Image List Content (Initially Hidden)-->
