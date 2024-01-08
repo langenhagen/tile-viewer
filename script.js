@@ -191,6 +191,13 @@ document.addEventListener("keydown", (e) => {
     showImage(-1); // Previous image
   } else if (e.key.toLowerCase() === "c" || e.key.toLowerCase() === "y") {
     copyFileNameToClipboard(); // Copy file name
+  } else if (e.key === "Escape") {
+    // Close all modal dialogues on "Esc" key press
+    const modals = document.querySelectorAll(".modal-content");
+    modals.forEach((modal) => {
+      modal.style.display = "none";
+    });
+    movementEnabled = true;
   }
 });
 
