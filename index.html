@@ -16,8 +16,29 @@
     <button onclick="showImage(-1)">Prev Image</button>
     <button onclick="showImage(1)">Next Image</button>
     <button onclick="copyFileNameToClipboard()">📋</button>
+    <button id="help-button" onclick="toggleHelp()">?</button>
     <span id="current-file-info"></span>
-    <script src="script.js" defer></script>
     <div class="background"></div>
+
+    <!-- Help Content (Initially Hidden) -->
+    <div id="help-content" class="help-content">
+      <strong>Usage:</strong>
+      <ul>
+        <li>
+          Click "Choose Files" or press 'o' to open the file dialog. You can select and load
+          multiple images at once.
+        </li>
+        <li>Click and drag the mouse to pan.</li>
+        <li>Use mouse wheel to zoom.</li>
+        <li>Press '0' to reset to the original size.</li>
+        <li>Click "Prev Image" or press '←' or 'j' to view the previous image.</li>
+        <li>Click "Next Image" or press '→' or 'k' to view the next image.</li>
+        <li>Click "📋" or press 'c' or 'y' to copy the current file name to the clipboard.</li>
+        <li>Click "?" or press '?' to toggle the help.</li>
+      </ul>
+      <button onclick="toggleHelp()">Close</button>
+    </div>
+
+    <script src="script.js" defer></script>
   </body>
 </html>

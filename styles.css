@@ -1,10 +1,11 @@
-/*
- * Stylesheet for the tile viewer.
- */
+/* Stylesheet for the tile viewer */
+
 body,
 html {
   margin: 0;
   background-color: black;
+  color: white;
+  font-family: "Arial", sans-serif;
 }
 
 .background {
@@ -30,6 +31,38 @@ input[type="file"]:hover {
 }
 
 #current-file-info {
-  font-family: "Arial", sans-serif;
   color: white;
+}
+
+#help-button {
+  position: fixed;
+  right: 0px;
+}
+
+.help-content {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+}
+
+.help-content button {
+  background-color: #2e86df;
+  border: 2px solid #2e86df;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.help-content button:hover {
+  background-color: #1f65c9;
+  border: 2px solid #1f65c9;
+}
+
+.help-content ul li {
+  margin-bottom: 10px;
 }
