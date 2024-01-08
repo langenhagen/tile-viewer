@@ -6,6 +6,7 @@ html {
   background-color: black;
   color: white;
   font-family: "Arial", sans-serif;
+  user-select: none;
 }
 
 .background {
@@ -32,6 +33,7 @@ input[type="file"]:hover {
 
 #current-file-info {
   color: white;
+  user-select: all;
 }
 
 #help-button {
@@ -51,12 +53,17 @@ input[type="file"]:hover {
   border-radius: 20px;
 }
 
+.modal-content {
+  user-select: text;
+}
+
 .modal-content button {
   background-color: #2e86df;
   border: 2px solid #2e86df;
   color: white;
   padding: 10px;
   cursor: pointer;
+  user-select: none;
 }
 
 .modal-content button:hover {
