@@ -15,8 +15,8 @@
     <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple title="Choose Files (o)" />
     <button id="list-button" onclick="toggleImageList()" title="Toggle Image File List (l)">📄</button>
     <button id="bookmark-list-button" onclick="toggleBookmarksList()" title="Toggle Bookmark File List (b)">📚</button>
-    <button onclick="showImage(-1)" title="Previous Image (j)">🡄</button>
-    <button onclick="showImage(1)" title="Next Image (k)">🡆</button>
+    <button onclick="showImage(-1)" title="Previous Image (j)">◄</button>
+    <button onclick="showImage(1)" title="Next Image (k)">►</button>
     <button onclick="copyFileNameToClipboard()" title="Copy File Name (y)">📋</button>
     <button id="help-button" onclick="toggleHelp()" title="Toggle Help (?)">?</button>
     <span id="bookmark-indicator" class="bookmark-indicator" onclick="toggleBookmark()">🔖</span>
@@ -49,8 +49,8 @@
         <li>Use mouse wheel to zoom.</li>
         <li>Click "📄" or press 'l' to toggle the file list.</li>
         <li>Press '0' to reset to the original size.</li>
-        <li>Click "🡄" or press '←' or 'j' to view the previous image.</li>
-        <li>Click "🡆" or press '→' or 'k' to view the next image.</li>
+        <li>Click "◄" or press '←' or 'j' to view the previous image.</li>
+        <li>Click "►" or press '→' or 'k' to view the next image.</li>
         <li>Click "📋" or press 'c' or 'y' to copy the current file name to the clipboard.</li>
         <li>Click the "🔖" indicator or press `m` or `'` to toggle the current image bookmark.</li>
         <li>Click the "📚" button or press `b` to toggle the bookmarks list</li>
