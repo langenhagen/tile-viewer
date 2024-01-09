@@ -247,9 +247,9 @@ document.addEventListener("keydown", (e) => {
     toggleImageList(); // Toggle file list modal
   } else if (e.key === "0") {
     resetToOriginalSize(); // Reset to original size
-  } else if (e.key === "ArrowRight" || e.key.toLowerCase() === "k") {
+  } else if (e.key === "ArrowRight" || e.key.toLowerCase() === "k" || e.key === "[") {
     showImage(1); // Next image
-  } else if (e.key === "ArrowLeft" || e.key.toLowerCase() === "j") {
+  } else if (e.key === "ArrowLeft" || e.key.toLowerCase() === "j" || e.key === "]") {
     showImage(-1); // Previous image
   } else if (e.key.toLowerCase() === "c" || e.key.toLowerCase() === "y") {
     copyFileNameToClipboard(); // Copy file name
