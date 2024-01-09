@@ -3,7 +3,7 @@
  * file keyboard shortcut functionality.
  */
 let isDragging = false;
-let numOpenModals = 0;
+let movementEnabled = true;
 let initialMouseX;
 let initialMouseY;
 let originalImageWidth;
@@ -55,7 +55,7 @@ function toggleImageList() {
   const modal = document.getElementById("list-modal");
   if (modal.style.display === "block") {
     modal.style.display = "none";
-    numOpenModals -= 1;
+    movementEnabled = true;
   } else {
     const imageList = document.getElementById("image-list");
     imageList.innerHTML = "";
@@ -64,7 +64,8 @@ function toggleImageList() {
       listItem.textContent = file.name;
       imageList.appendChild(listItem);
     });
-    numOpenModals += 1;
+    closeAllModals();
+    movementEnabled = false;
     modal.style.display = "block";
   }
 }
@@ -83,7 +84,7 @@ function toggleBookmarks() {
   const modal = document.getElementById("bookmarks-modal");
   if (modal.style.display === "block") {
     modal.style.display = "none";
-    numOpenModals -= 1;
+    movementEnabled = true;
   } else {
     if (imagesDescriptions.length === 0) {
       return;
@@ -98,7 +99,8 @@ function toggleBookmarks() {
       bookmarkList.appendChild(listItem);
     });
 
-    numOpenModals += 1;
+    closeAllModals();
+    movementEnabled = false;
     modal.style.display = "block";
   }
 }
@@ -108,11 +110,21 @@ function toggleHelp() {
   const helpContent = document.getElementById("help-modal");
   if (helpContent.style.display === "block") {
     helpContent.style.display = "none";
-    numOpenModals -= 1;
+    movementEnabled = true;
   } else {
+    closeAllModals();
     helpContent.style.display = "block";
-    numOpenModals += 1;
+    movementEnabled = false;
   }
+}
+
+// Function to close all modal dialogues.
+function closeAllModals() {
+  const modals = document.querySelectorAll(".modal-content");
+  modals.forEach((modal) => {
+    modal.style.display = "none";
+  });
+  movementEnabled = true;
 }
 
 // Set the initial image from the CSS file.
@@ -136,7 +148,7 @@ document.addEventListener("mouseup", () => {
 
 // Panning functionality.
 document.addEventListener("mousemove", (e) => {
-  if (numOpenModals !== 0) {
+  if (!movementEnabled) {
     return;
   }
   if (isDragging) {
@@ -158,7 +170,7 @@ document.addEventListener("mousemove", (e) => {
 
 // Zooming functionality.
 document.addEventListener("wheel", (e) => {
-  if (numOpenModals !== 0) {
+  if (!movementEnabled) {
     return;
   }
 
@@ -235,12 +247,7 @@ document.addEventListener("keydown", (e) => {
   } else if (e.key.toLowerCase() === "b") {
     toggleBookmarks(); // Toggle bookmark list modal
   } else if (e.key === "Escape") {
-    // Close all modal dialogues on "Esc" key press
-    const modals = document.querySelectorAll(".modal-content");
-    modals.forEach((modal) => {
-      modal.style.display = "none";
-    });
-    numOpenModals = 0;
+    closeAllModals(); // Close all modals
   }
 });
 
