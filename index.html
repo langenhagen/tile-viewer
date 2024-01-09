@@ -12,18 +12,20 @@
     <title>Tiled Image Viewer</title>
   </head>
   <body>
-    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple title="Choose Files (o)" />
-    <button id="list-button" onclick="toggleImageList()" title="Toggle Image File List (l)">📄</button>
-    <button id="bookmark-list-button" onclick="toggleBookmarksList()" title="Toggle Bookmark File List (b)">📚</button>
-    <button onclick="showImage(-1)" title="Previous Image (j)">◄</button>
-    <button onclick="showImage(1)" title="Next Image (k)">►</button>
-    <button onclick="copyFileNameToClipboard()" title="Copy File Name (y)">📋</button>
-    <button id="help-button" onclick="toggleHelp()" title="Toggle Help (?)">?</button>
-    <span id="bookmark-indicator" class="bookmark-indicator" onclick="toggleBookmark()">🔖</span>
-    <span id="current-file-info" title="Current File name"></span>
+    <div class="menu-content">
+      <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple title="Choose Files (o)" />
+      <button onclick="toggleImageList()" title="Toggle Image File List (l)">📄</button>
+      <button onclick="toggleBookmarksList()" title="Toggle Bookmark File List (b)">📚</button>
+      <button onclick="showImage(-1)" title="Previous Image (j)">◄</button>
+      <button onclick="showImage(1)" title="Next Image (k)">►</button>
+      <button onclick="copyFileNameToClipboard()" title="Copy File Name (y)">📋</button>
+      <button id="help-button" onclick="toggleHelp()" title="Toggle Help (?)">?</button>
+      <button id="bookmark-indicator" onclick="toggleBookmark()" class="bookmark-indicator menu-button">🔖</button>
+      <span id="current-file-info" title="Current File name"></span>
+    </div>
     <div class="background"></div>
 
-    <!-- Image List Modal (Initially Hidden)-->
+    <!-- Image List Modal (Initially Hidden) -->
     <div id="list-modal" class="modal-content">
       <strong>Currently Loaded Images:</strong>
       <ul id="image-list" class="scrollable-content"></ul>

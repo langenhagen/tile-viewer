@@ -1,4 +1,4 @@
-/* Stylesheet for the tile viewer */
+/* Stylesheet for the tile viewer. */
 
 body,
 html {
@@ -7,6 +7,10 @@ html {
   color: white;
   font-family: "Arial", sans-serif;
   user-select: none;
+}
+
+*:focus {
+  outline: none; /* Remove potential outline on focused elements */
 }
 
 .background {
@@ -18,27 +22,36 @@ html {
 }
 
 button,
-input[type="file"] {
-  background-color: #34495e;
-  border: 2px solid #2c3e50;
-  color: white;
+input {
   cursor: pointer;
+  user-select: none;
 }
 
-button:hover,
-input[type="file"]:hover {
+.menu-content button,
+input {
+  background-color: #34495e;
+  border: 0;
+  color: white;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.menu-content button:hover,
+input:hover {
   background-color: #2e86df;
-  border: 2px solid #2e86df;
 }
 
 #current-file-info {
-  color: white;
   user-select: all;
 }
 
 #help-button {
   position: fixed;
-  right: 0px;
+  right: 0;
+}
+
+#bookmark-indicator {
+  background-color: rgba(255, 0, 0, 0);
 }
 
 .modal-content {
@@ -56,16 +69,14 @@ input[type="file"]:hover {
 
 .modal-content button {
   background-color: #2e86df;
-  border: 2px solid #2e86df;
+  border: 0;
   color: white;
-  padding: 10px;
-  cursor: pointer;
-  user-select: none;
+  padding: 12px;
+  border-radius: 6px;
 }
 
 .modal-content button:hover {
   background-color: #1f65c9;
-  border: 2px solid #1f65c9;
 }
 
 .modal-content ul li {
@@ -75,4 +86,5 @@ input[type="file"]:hover {
 .scrollable-content {
   max-height: 70vh; /* Set a maximum height for the list to fit within the modal */
   overflow-y: auto; /* Enable vertical scrolling for the list */
+  padding-right: 40px; /* Leave some space between the scrollbar and the longest list entry */
 }
