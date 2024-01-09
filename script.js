@@ -232,6 +232,7 @@ document.addEventListener("keydown", (e) => {
     toggleHelp(); // Toggle help modal on "?" key press
   } else if (e.key.toLowerCase() === "o") {
     document.getElementById("file-input").click(); // Open file dialog
+    closeAllModals();
   } else if (e.key.toLowerCase() === "l") {
     toggleImageList(); // Toggle file list modal
   } else if (e.key === "0") {
