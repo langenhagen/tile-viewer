@@ -71,7 +71,7 @@ function toggleImageList() {
 }
 
 // Function to bookmark or unmark the current image.
-function toggleMarkImageIndex() {
+function toggleBookmark() {
   if (bookmarkedIndices.has(currentImageIndex)) {
     bookmarkedIndices.delete(currentImageIndex);
   } else {
@@ -80,7 +80,7 @@ function toggleMarkImageIndex() {
 }
 
 // Function to toggle the visibility of the bookmark image list modal.
-function toggleBookmarks() {
+function toggleBookmarksList() {
   const modal = document.getElementById("bookmarks-modal");
   if (modal.style.display === "block") {
     modal.style.display = "none";
@@ -244,9 +244,9 @@ document.addEventListener("keydown", (e) => {
   } else if (e.key.toLowerCase() === "c" || e.key.toLowerCase() === "y") {
     copyFileNameToClipboard(); // Copy file name
   } else if (e.key.toLowerCase() === "m" || e.key === "'") {
-    toggleMarkImageIndex(); // Toggle bookmark image
+    toggleBookmark(); // Toggle bookmark image
   } else if (e.key.toLowerCase() === "b") {
-    toggleBookmarks(); // Toggle bookmark list modal
+    toggleBookmarksList(); // Toggle bookmark list modal
   } else if (e.key === "Escape") {
     closeAllModals(); // Close all modals
   }

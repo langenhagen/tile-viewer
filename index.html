@@ -14,7 +14,7 @@
   <body>
     <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple title="Choose Files (o)" />
     <button id="list-button" onclick="toggleImageList()" title="Toggle Image File List (l)">📄</button>
-    <button id="bookmark-list-button" onclick="toggleBookmarks()" title="Toggle Bookmark File List (b)">📚</button>
+    <button id="bookmark-list-button" onclick="toggleBookmarksList()" title="Toggle Bookmark File List (b)">📚</button>
     <button onclick="showImage(-1)" title="Previous Image (j)">🡄</button>
     <button onclick="showImage(1)" title="Next Image (k)">🡆</button>
     <button onclick="copyFileNameToClipboard()" title="Copy File Name (y)">📋</button>
@@ -33,7 +33,7 @@
     <div id="bookmarks-modal" class="modal-content">
       <strong>Bookmarked Images:</strong>
       <ul id="bookmark-list" class="scrollable-content"></ul>
-      <button onclick="toggleBookmarks()">Close</button>
+      <button onclick="toggleBookmarksList()">Close</button>
     </div>
 
     <!-- Help Modal (Initially Hidden) -->
