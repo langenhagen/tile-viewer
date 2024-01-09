@@ -51,7 +51,7 @@ function showImage(direction) {
   document.getElementById("current-file-info").textContent = file.name;
 }
 
-// Function to toggle the visibility of the image list modal and to populate it.
+// Toggle the visibility of the image list modal and populate it.
 function toggleImageList() {
   const modal = document.getElementById("list-modal");
   if (modal.style.display === "block") {
@@ -71,7 +71,7 @@ function toggleImageList() {
   }
 }
 
-// Function to update the bookmark indicator according to the bookmark-status of the current image.
+// Update the bookmark indicator according to the bookmark-status of the current image.
 function updateBookmarkIndicator() {
   const bookmarkIndicator = document.getElementById("bookmark-indicator");
   const isBookmarked = bookmarkedIndices.has(currentImageIndex);
@@ -79,7 +79,7 @@ function updateBookmarkIndicator() {
   bookmarkIndicator.title = isBookmarked ? "Toggle Bookmark Off (m)" : "Toggle Bookmark On (m)";
 }
 
-// Function to bookmark or unmark the current image.
+// Bookmark or unmark the current image.
 function toggleBookmark() {
   if (bookmarkedIndices.has(currentImageIndex)) {
     bookmarkedIndices.delete(currentImageIndex);
@@ -89,7 +89,7 @@ function toggleBookmark() {
   updateBookmarkIndicator();
 }
 
-// Function to toggle the visibility of the bookmark image list modal.
+// Toggle the visibility of the bookmark image list modal.
 function toggleBookmarksList() {
   const modal = document.getElementById("bookmarks-modal");
   if (modal.style.display === "block") {
@@ -115,7 +115,7 @@ function toggleBookmarksList() {
   }
 }
 
-// Function to toggle the visibility of the help modal.
+// Toggle the visibility of the help modal.
 function toggleHelp() {
   const helpContent = document.getElementById("help-modal");
   if (helpContent.style.display === "block") {
@@ -128,7 +128,7 @@ function toggleHelp() {
   }
 }
 
-// Function to close all modal dialogues.
+// Close all modal dialogues.
 function closeAllModals() {
   const modals = document.querySelectorAll(".modal-content");
   modals.forEach((modal) => {
@@ -195,7 +195,7 @@ document.addEventListener("wheel", (e) => {
   const newBackgroundSizeY = currentBackgroundSizeY * scaleChange;
   background.style.backgroundSize = `${newBackgroundSizeX}px ${newBackgroundSizeY}px`;
 
-  // Zoom around mouse as center point
+  // Zoom around mouse as the center point
   const offsetX = e.clientX - background.offsetLeft;
   const offsetY = e.clientY - background.offsetTop;
   const currentBackgroundPosition = getComputedStyle(background).backgroundPosition.split(" ");
