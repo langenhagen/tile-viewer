@@ -31,6 +31,7 @@ function loadImage(imagePath) {
       originalImageHeight = img.height;
       resolve();
     };
+    updateBookmarkIndicator();
   });
 }
 
@@ -70,6 +71,14 @@ function toggleImageList() {
   }
 }
 
+// Function to update the bookmark indicator according to the bookmark-status of the current image.
+function updateBookmarkIndicator() {
+  const bookmarkIndicator = document.getElementById("bookmark-indicator");
+  const isBookmarked = bookmarkedIndices.has(currentImageIndex);
+  bookmarkIndicator.style.color = isBookmarked ? "rgba(0, 0, 0, 1.0)" : "rgba(0, 0, 0, 0.4)";
+  bookmarkIndicator.title = isBookmarked ? "Toggle Bookmark Off (m)" : "Toggle Bookmark On (m)";
+}
+
 // Function to bookmark or unmark the current image.
 function toggleBookmark() {
   if (bookmarkedIndices.has(currentImageIndex)) {
@@ -77,6 +86,7 @@ function toggleBookmark() {
   } else {
     bookmarkedIndices.add(currentImageIndex);
   }
+  updateBookmarkIndicator();
 }
 
 // Function to toggle the visibility of the bookmark image list modal.

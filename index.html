@@ -19,6 +19,7 @@
     <button onclick="showImage(1)" title="Next Image (k)">🡆</button>
     <button onclick="copyFileNameToClipboard()" title="Copy File Name (y)">📋</button>
     <button id="help-button" onclick="toggleHelp()" title="Toggle Help (?)">?</button>
+    <span id="bookmark-indicator" class="bookmark-indicator" onclick="toggleBookmark()">🔖</span>
     <span id="current-file-info" title="Current File name"></span>
     <div class="background"></div>
 
@@ -51,7 +52,7 @@
         <li>Click "🡄" or press '←' or 'j' to view the previous image.</li>
         <li>Click "🡆" or press '→' or 'k' to view the next image.</li>
         <li>Click "📋" or press 'c' or 'y' to copy the current file name to the clipboard.</li>
-        <li>Click the bookmark indicator button or press `m` or `'` to toggle the current image bookmark.</li>
+        <li>Click the "🔖" indicator or press `m` or `'` to toggle the current image bookmark.</li>
         <li>Click the "📚" button or press `b` to toggle the bookmarks list</li>
         <li>Click "?" or press '?' to toggle the help.</li>
       </ul>
