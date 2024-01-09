@@ -51,9 +51,9 @@ function showImage(direction) {
 
 // Function to toggle the visibility of the image list modal and to populate it.
 function toggleImageList() {
-  const listContent = document.getElementById("list-modal");
-  if (listContent.style.display === "block") {
-    listContent.style.display = "none";
+  const modal = document.getElementById("list-modal");
+  if (modal.style.display === "block") {
+    modal.style.display = "none";
     movementEnabled = true;
   } else {
     movementEnabled = false;
@@ -64,7 +64,7 @@ function toggleImageList() {
       listItem.textContent = file.name;
       imageList.appendChild(listItem);
     });
-    listContent.style.display = "block";
+    modal.style.display = "block";
   }
 }
 
