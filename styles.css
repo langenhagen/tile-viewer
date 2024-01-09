@@ -51,10 +51,9 @@ input[type="file"]:hover {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 20px;
   border-radius: 20px;
-}
-
-.modal-content {
   user-select: text;
+  max-height: 70vh; /* Set a maximum height for the list to fit within the modal */
+  overflow-y: auto; /* Enable vertical scrolling for the list */
 }
 
 .modal-content button {
@@ -73,10 +72,4 @@ input[type="file"]:hover {
 
 .modal-content ul li {
   margin-bottom: 10px;
-}
-
-#image-list {
-  max-height: 70vh; /* Set a maximum height for the list to fit within the modal */
-  overflow-y: auto; /* Enable vertical scrolling for the list */
-  font-size: 14px;
 }

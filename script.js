@@ -3,7 +3,7 @@
  * file keyboard shortcut functionality.
  */
 let isDragging = false;
-let movementEnabled = true;
+let numOpenModals = 0;
 let initialMouseX;
 let initialMouseY;
 let originalImageWidth;
@@ -54,9 +54,8 @@ function toggleImageList() {
   const modal = document.getElementById("list-modal");
   if (modal.style.display === "block") {
     modal.style.display = "none";
-    movementEnabled = true;
+    numOpenModals -= 1;
   } else {
-    movementEnabled = false;
     const imageList = document.getElementById("image-list");
     imageList.innerHTML = "";
     Array.from(imagesDescriptions).forEach((file) => {
@@ -64,6 +63,41 @@ function toggleImageList() {
       listItem.textContent = file.name;
       imageList.appendChild(listItem);
     });
+    numOpenModals += 1;
+    modal.style.display = "block";
+  }
+}
+
+// Function to bookmark or unmark the current image.
+function toggleMarkImageIndex() {
+  if (bookmarkedIndices.has(currentImageIndex)) {
+    bookmarkedIndices.delete(currentImageIndex);
+  } else {
+    bookmarkedIndices.add(currentImageIndex);
+  }
+}
+
+// Function to toggle the visibility of the bookmark image list modal.
+function toggleBookmarks() {
+  const modal = document.getElementById("bookmarks-modal");
+  if (modal.style.display === "block") {
+    modal.style.display = "none";
+    numOpenModals -= 1;
+  } else {
+    if (imagesDescriptions.length === 0) {
+      return;
+    }
+
+    const bookmarkList = document.getElementById("bookmark-list");
+    bookmarkList.innerHTML = "";
+
+    bookmarkedIndices.forEach((index) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = imagesDescriptions[index].name;
+      bookmarkList.appendChild(listItem);
+    });
+
+    numOpenModals += 1;
     modal.style.display = "block";
   }
 }
@@ -73,8 +107,10 @@ function toggleHelp() {
   const helpContent = document.getElementById("help-modal");
   if (helpContent.style.display === "block") {
     helpContent.style.display = "none";
+    numOpenModals -= 1;
   } else {
     helpContent.style.display = "block";
+    numOpenModals += 1;
   }
 }
 
@@ -99,7 +135,7 @@ document.addEventListener("mouseup", () => {
 
 // Panning functionality.
 document.addEventListener("mousemove", (e) => {
-  if (!movementEnabled) {
+  if (numOpenModals !== 0) {
     return;
   }
   if (isDragging) {
@@ -121,7 +157,7 @@ document.addEventListener("mousemove", (e) => {
 
 // Zooming functionality.
 document.addEventListener("wheel", (e) => {
-  if (!movementEnabled) {
+  if (numOpenModals !== 0) {
     return;
   }
 
@@ -197,7 +233,7 @@ document.addEventListener("keydown", (e) => {
     modals.forEach((modal) => {
       modal.style.display = "none";
     });
-    movementEnabled = true;
+    numOpenModals = 0;
   }
 });
 
