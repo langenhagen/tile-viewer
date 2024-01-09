@@ -14,6 +14,7 @@
   <body>
     <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" multiple title="Choose Files (o)" />
     <button id="list-button" onclick="toggleImageList()" title="Toggle Image File List (l)">📄</button>
+    <button id="bookmark-list-button" onclick="toggleBookmarks()" title="Toggle Bookmark File List (b)">📚</button>
     <button onclick="showImage(-1)" title="Previous Image (j)">🡄</button>
     <button onclick="showImage(1)" title="Next Image (k)">🡆</button>
     <button onclick="copyFileNameToClipboard()" title="Copy File Name (y)">📋</button>
@@ -21,14 +22,21 @@
     <span id="current-file-info" title="Current File name"></span>
     <div class="background"></div>
 
-    <!-- Image List Content (Initially Hidden)-->
+    <!-- Image List Modal (Initially Hidden)-->
     <div id="list-modal" class="modal-content">
       <strong>Currently Loaded Images:</strong>
       <ul id="image-list"></ul>
       <button onclick="toggleImageList()">Close</button>
     </div>
 
-    <!-- Help Content (Initially Hidden) -->
+    <!-- Bookmark List Modal (Initially Hidden) -->
+    <div id="bookmarks-modal" class="modal-content">
+      <strong>Bookmarked Images:</strong>
+      <ul id="bookmark-list"></ul>
+      <button onclick="toggleBookmarks()">Close</button>
+    </div>
+
+    <!-- Help Modal (Initially Hidden) -->
     <div id="help-modal" class="modal-content">
       <strong>Usage:</strong>
       <ul>
@@ -43,6 +51,8 @@
         <li>Click "🡄" or press '←' or 'j' to view the previous image.</li>
         <li>Click "🡆" or press '→' or 'k' to view the next image.</li>
         <li>Click "📋" or press 'c' or 'y' to copy the current file name to the clipboard.</li>
+        <li>Click the bookmark indicator button or press `m` or `'` to toggle the current image bookmark.</li>
+        <li>Click the "📚" button or press `b` to toggle the bookmarks list</li>
         <li>Click "?" or press '?' to toggle the help.</li>
       </ul>
       <button onclick="toggleHelp()">Close</button>

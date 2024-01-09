@@ -11,6 +11,7 @@ let originalImageHeight;
 let imagesDescriptions = [];
 let imagesData = [];
 let currentImageIndex = 0;
+let bookmarkedIndices = new Set();
 
 // Reset image to its original size.
 function resetToOriginalSize() {
@@ -184,7 +185,7 @@ document.addEventListener("wheel", (e) => {
   background.style.backgroundPositionY = `${scaledPositionY}px`;
 });
 
-// Change background file.
+// Change image files.
 document.getElementById("file-input").addEventListener("change", async (e) => {
   const fileInput = e.target;
   imagesDescriptions = fileInput.files;
@@ -208,17 +209,19 @@ document.getElementById("file-input").addEventListener("change", async (e) => {
     };
 
     reader.readAsDataURL(file);
+
+    bookmarkedIndices.clear();
   }
 });
 
 // Keyboard shortcut listener.
 document.addEventListener("keydown", (e) => {
   if (e.key === "?") {
-    toggleHelp(); // Toggle help on "?" key press
+    toggleHelp(); // Toggle help modal on "?" key press
   } else if (e.key.toLowerCase() === "o") {
     document.getElementById("file-input").click(); // Open file dialog
   } else if (e.key.toLowerCase() === "l") {
-    toggleImageList(); // Toggle file list
+    toggleImageList(); // Toggle file list modal
   } else if (e.key === "0") {
     resetToOriginalSize(); // Reset to original size
   } else if (e.key === "ArrowRight" || e.key.toLowerCase() === "k") {
@@ -227,6 +230,10 @@ document.addEventListener("keydown", (e) => {
     showImage(-1); // Previous image
   } else if (e.key.toLowerCase() === "c" || e.key.toLowerCase() === "y") {
     copyFileNameToClipboard(); // Copy file name
+  } else if (e.key.toLowerCase() === "m" || e.key === "'") {
+    toggleMarkImageIndex(); // Toggle bookmark image
+  } else if (e.key.toLowerCase() === "b") {
+    toggleBookmarks(); // Toggle bookmark list modal
   } else if (e.key === "Escape") {
     // Close all modal dialogues on "Esc" key press
     const modals = document.querySelectorAll(".modal-content");

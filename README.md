@@ -18,6 +18,8 @@ Find the webapp under https://langenhagen.github.io/tile-viewer.
 - Click "🡄" or press the left arrow key or `j` to show the previous file.
 - Click "🡆" or press the right arrow key or `k` to show the next file.
 - Click the "📋" button or press `c` or `y` to copy the current file's name.
+- Click the bookmark indicator or press `m` or `'` to toggle the current image bookmark.
+- Click the "📚" button or press `b` to toggle the bookmarks list
 - Click "?" or press `?` to toggle the help.
 
 
