@@ -238,26 +238,27 @@ document.getElementById("file-input").addEventListener("change", async (e) => {
 
 // Keyboard shortcut listener.
 document.addEventListener("keydown", (e) => {
-  if (e.key === "?") {
+  key = e.key;
+  if (key === "?") {
     toggleHelp(); // Toggle help modal on "?" key press
-  } else if (e.key.toLowerCase() === "o") {
+  } else if (key.toLowerCase() === "o") {
     document.getElementById("file-input").click(); // Open file dialog
     closeAllModals();
-  } else if (e.key.toLowerCase() === "l") {
+  } else if (key.toLowerCase() === "l") {
     toggleImageList(); // Toggle file list modal
-  } else if (e.key === "0") {
+  } else if (key === "0") {
     resetToOriginalSize(); // Reset to original size
-  } else if (e.key === "ArrowRight" || e.key.toLowerCase() === "k" || e.key === "[") {
+  } else if (key === "ArrowRight" || key.toLowerCase() === "k" || key === "[") {
     showImage(1); // Next image
-  } else if (e.key === "ArrowLeft" || e.key.toLowerCase() === "j" || e.key === "]") {
+  } else if (key === "ArrowLeft" || key.toLowerCase() === "j" || key === "]") {
     showImage(-1); // Previous image
-  } else if (e.key.toLowerCase() === "c" || e.key.toLowerCase() === "y") {
+  } else if ((key.toLowerCase() === "c" && !e.ctrlKey && !e.metaKey) || key.toLowerCase() === "y") {
     copyFileNameToClipboard(); // Copy file name
-  } else if (e.key.toLowerCase() === "m" || e.key === "'") {
+  } else if (key.toLowerCase() === "m" || key === "'") {
     toggleBookmark(); // Toggle bookmark image
-  } else if (e.key.toLowerCase() === "b") {
+  } else if (key.toLowerCase() === "b") {
     toggleBookmarksList(); // Toggle bookmark list modal
-  } else if (e.key === "Escape") {
+  } else if (key === "Escape") {
     closeAllModals(); // Close all modals
   }
 });
