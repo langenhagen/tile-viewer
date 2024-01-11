@@ -239,6 +239,10 @@ document.getElementById("file-input").addEventListener("change", async (e) => {
 // Keyboard shortcut listener.
 document.addEventListener("keydown", (e) => {
   key = e.key;
+
+  const isModifierKey = e.ctrlKey || e.altKey || e.metaKey;
+  if (isModifierKey) return;
+
   if (key === "?") {
     toggleHelp(); // Toggle help modal on "?" key press
   } else if (key.toLowerCase() === "o") {
