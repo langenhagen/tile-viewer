@@ -236,6 +236,14 @@ document.getElementById("file-input").addEventListener("change", async (e) => {
   }
 });
 
+// Copy the content of the `current-file-info` span to the clipboard.
+function copyFileNameToClipboard() {
+  const textToCopy = document.getElementById("current-file-info").textContent;
+  navigator.clipboard.writeText(textToCopy).catch((error) => {
+    console.error("Unable to copy to clipboard:", error);
+  });
+}
+
 // Keyboard shortcut listener.
 document.addEventListener("keydown", (e) => {
   key = e.key;
@@ -266,11 +274,3 @@ document.addEventListener("keydown", (e) => {
     closeAllModals(); // Close all modals
   }
 });
-
-// Copy the content of the `current-file-info` span to the clipboard.
-function copyFileNameToClipboard() {
-  const textToCopy = document.getElementById("current-file-info").textContent;
-  navigator.clipboard.writeText(textToCopy).catch((error) => {
-    console.error("Unable to copy to clipboard:", error);
-  });
-}
