@@ -236,6 +236,16 @@ document.getElementById("file-input").addEventListener("change", async (e) => {
   }
 });
 
+// Prevent the default behavior of opening files when they are dragged over the document
+document.addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+
+// Prevent the default behavior of opening files when they are dragged over the document
+document.addEventListener("drop", (e) => {
+  e.preventDefault();
+});
+
 // Copy the content of the `current-file-info` span to the clipboard.
 function copyFileNameToClipboard() {
   const textToCopy = document.getElementById("current-file-info").textContent;
