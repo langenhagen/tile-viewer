@@ -8,8 +8,7 @@ let initialMouseX;
 let initialMouseY;
 let originalImageWidth;
 let originalImageHeight;
-let imagesDescriptions = [];
-let imagesData = [];
+let images = [];
 let currentImageIndex = 0;
 let bookmarkedIndices = new Set();
 
@@ -37,22 +36,20 @@ function loadImage(imagePath) {
 
 // Open one or several images.
 async function loadImages(e) {
-  imagesDescriptions = e.target.files || e.dataTransfer.files;
-  document.getElementById("current-file-info").textContent = imagesDescriptions[0].name;
-
-  imagesData = [];
+  const fileList = e.target.files || e.dataTransfer.files;
+  images = Array.from(fileList);
   currentImageIndex = 0;
+  document.getElementById("current-file-info").textContent = images[currentImageIndex].name;
 
-  for (const file of imagesDescriptions) {
+  for (const [index, file] of images.entries()) {
     const reader = new FileReader();
-
     reader.onload = async function (event) {
       const imageData = event.target.result;
       await loadImage(imageData);
-      imagesData.push(imageData);
-      if (imagesData.length === imagesDescriptions.length) {
+      images[index].data = imageData;
+      if (index === 0) {
         document.querySelector(".background").style.backgroundImage =
-          `url(${imagesData[currentImageIndex]})`;
+          `url(${images[currentImageIndex].data})`;
         resetToOriginalSize();
       }
     };
@@ -65,17 +62,17 @@ async function loadImages(e) {
 
 // Show the image in the specified direction (1 for next, -1 for previous).
 function showImage(direction) {
-  if (imagesData.length === 0) {
+  if (images.length === 0) {
     return;
   }
 
-  currentImageIndex = (currentImageIndex + direction + imagesData.length) % imagesData.length;
-  const newImageData = imagesData[currentImageIndex];
+  currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+  const newImageData = images[currentImageIndex].data;
   const background = document.querySelector(".background");
   background.style.backgroundImage = `url("${newImageData}")`;
   loadImage(newImageData);
   resetToOriginalSize();
-  const file = imagesDescriptions[currentImageIndex];
+  const file = images[currentImageIndex];
   document.getElementById("current-file-info").textContent = file.name;
 }
 
@@ -88,7 +85,7 @@ function toggleImageList() {
   } else {
     const imageList = document.getElementById("image-list");
     imageList.innerHTML = "";
-    Array.from(imagesDescriptions).forEach((file) => {
+    Array.from(images).forEach((file) => {
       const listItem = document.createElement("li");
       listItem.textContent = file.name;
       imageList.appendChild(listItem);
@@ -124,7 +121,7 @@ function toggleBookmarksList() {
     modal.style.display = "none";
     movementEnabled = true;
   } else {
-    if (imagesDescriptions.length === 0) {
+    if (images.length === 0) {
       return;
     }
 
@@ -133,7 +130,7 @@ function toggleBookmarksList() {
 
     bookmarkedIndices.forEach((index) => {
       const listItem = document.createElement("li");
-      listItem.textContent = imagesDescriptions[index].name;
+      listItem.textContent = images[index].name;
       bookmarkList.appendChild(listItem);
     });
 
