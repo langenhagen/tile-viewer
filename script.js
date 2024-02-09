@@ -6,8 +6,8 @@ let isDragging = false;
 let movementEnabled = true;
 let initialMouseX;
 let initialMouseY;
-let originalImageWidth;
-let originalImageHeight;
+let imageOriginalWidth;
+let imageOriginalHeight;
 let images = [];
 let currentImageIndex = 0;
 let bookmarkedIndices = new Set();
@@ -15,8 +15,8 @@ let bookmarkedIndices = new Set();
 // Reset image to its original size.
 function resetToOriginalSize() {
   const background = document.querySelector(".background");
-  if (originalImageWidth && originalImageHeight) {
-    background.style.backgroundSize = `${originalImageWidth}px ${originalImageHeight}px`;
+  if (imageOriginalWidth && imageOriginalHeight) {
+    background.style.backgroundSize = `${imageOriginalWidth}px ${imageOriginalHeight}px`;
   }
 }
 
@@ -26,8 +26,8 @@ function loadImage(imagePath) {
     const img = new Image();
     img.src = imagePath;
     img.onload = function () {
-      originalImageWidth = img.width;
-      originalImageHeight = img.height;
+      imageOriginalWidth = img.width;
+      imageOriginalHeight = img.height;
       resolve();
     };
     updateBookmarkIndicator();
@@ -61,17 +61,17 @@ async function loadImages(e) {
 }
 
 // Show the image in the specified direction (1 for next, -1 for previous).
-function showImage(direction) {
+async function showImage(direction) {
   if (images.length === 0) {
     return;
   }
 
   currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
   const newImageData = images[currentImageIndex].data;
+  await loadImage(newImageData);
+  resetToOriginalSize();
   const background = document.querySelector(".background");
   background.style.backgroundImage = `url("${newImageData}")`;
-  loadImage(newImageData);
-  resetToOriginalSize();
   const file = images[currentImageIndex];
   document.getElementById("current-file-info").textContent = file.name;
 }
