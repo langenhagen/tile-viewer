@@ -6,8 +6,8 @@ let isDragging = false;
 let movementEnabled = true;
 let initialMouseX;
 let initialMouseY;
-let imageOriginalWidth;
-let imageOriginalHeight;
+let initialImageWidth;
+let initialImageHeight;
 let images = [];
 let currentImageIndex = 0;
 let bookmarkedIndices = new Set();
@@ -15,20 +15,21 @@ let bookmarkedIndices = new Set();
 // Reset image to its original size.
 function resetToOriginalSize() {
   const background = document.querySelector(".background");
-  if (imageOriginalWidth && imageOriginalHeight) {
-    background.style.backgroundSize = `${imageOriginalWidth}px ${imageOriginalHeight}px`;
+  if (images.length === 0) {
+    background.style.backgroundSize = `${initialImageWidth}px ${initialImageHeight}px`;
+  } else {
+    image = images[currentImageIndex];
+    background.style.backgroundSize = `${image.width}px ${image.height}px`;
   }
 }
 
 // Load an image file to get its dimensions.
-function loadImage(imagePath) {
+function getImageDimensions(imagePath) {
   return new Promise((resolve) => {
     const img = new Image();
     img.src = imagePath;
     img.onload = function () {
-      imageOriginalWidth = img.width;
-      imageOriginalHeight = img.height;
-      resolve();
+      resolve([img.width, img.height]);
     };
     updateBookmarkIndicator();
   });
@@ -36,6 +37,7 @@ function loadImage(imagePath) {
 
 // Open one or several images.
 async function loadImages(e) {
+   // e.target.files for files from input element events, e.dataTransfer.files for drag&drop events
   const fileList = e.target.files || e.dataTransfer.files;
   images = Array.from(fileList);
   currentImageIndex = 0;
@@ -45,8 +47,11 @@ async function loadImages(e) {
     const reader = new FileReader();
     reader.onload = async function (event) {
       const imageData = event.target.result;
-      await loadImage(imageData);
-      images[index].data = imageData;
+      const [imageWidth, imageHeight] = await getImageDimensions(imageData);
+      image = images[index];
+      image.data = imageData;
+      image.width = imageWidth;
+      image.height = imageHeight;
       if (index === 0) {
         document.querySelector(".background").style.backgroundImage =
           `url(${images[currentImageIndex].data})`;
@@ -68,7 +73,6 @@ async function showImage(direction) {
 
   currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
   const newImageData = images[currentImageIndex].data;
-  await loadImage(newImageData);
   resetToOriginalSize();
   const background = document.querySelector(".background");
   background.style.backgroundImage = `url("${newImageData}")`;
@@ -163,9 +167,12 @@ function closeAllModals() {
 }
 
 // Set the initial image from the CSS file.
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const initialImagePath = "default.jpg";
-  loadImage(initialImagePath);
+  const [imageWidth, imageHeight] = await getImageDimensions(initialImagePath);
+  initialImageWidth = imageWidth;
+  initialImageHeight = imageHeight;
+
   resetToOriginalSize();
   document.querySelector(".background").style.backgroundImage = `url(${initialImagePath})`;
   document.getElementById("current-file-info").textContent = initialImagePath;
