@@ -35,6 +35,34 @@ function loadImage(imagePath) {
   });
 }
 
+// Open one or several images.
+async function loadImages(e) {
+  imagesDescriptions = e.target.files || e.dataTransfer.files;
+  document.getElementById("current-file-info").textContent = imagesDescriptions[0].name;
+
+  imagesData = [];
+  currentImageIndex = 0;
+
+  for (const file of imagesDescriptions) {
+    const reader = new FileReader();
+
+    reader.onload = async function (event) {
+      const imageData = event.target.result;
+      await loadImage(imageData);
+      imagesData.push(imageData);
+      if (imagesData.length === imagesDescriptions.length) {
+        document.querySelector(".background").style.backgroundImage =
+          `url(${imagesData[currentImageIndex]})`;
+        resetToOriginalSize();
+      }
+    };
+
+    reader.readAsDataURL(file);
+
+    bookmarkedIndices.clear();
+  }
+}
+
 // Show the image in the specified direction (1 for next, -1 for previous).
 function showImage(direction) {
   if (imagesData.length === 0) {
@@ -208,42 +236,18 @@ document.addEventListener("wheel", (e) => {
 });
 
 // Change image files.
-document.getElementById("file-input").addEventListener("change", async (e) => {
-  const fileInput = e.target;
-  imagesDescriptions = fileInput.files;
-  document.getElementById("current-file-info").textContent = imagesDescriptions[0].name;
+document.getElementById("file-input").addEventListener("change", loadImages);
 
-  imagesData = [];
-  currentImageIndex = 0;
-
-  for (const file of imagesDescriptions) {
-    const reader = new FileReader();
-
-    reader.onload = async function (event) {
-      const imageData = event.target.result;
-      await loadImage(imageData);
-      imagesData.push(imageData);
-      if (imagesData.length === imagesDescriptions.length) {
-        document.querySelector(".background").style.backgroundImage =
-          `url(${imagesData[currentImageIndex]})`;
-        resetToOriginalSize();
-      }
-    };
-
-    reader.readAsDataURL(file);
-
-    bookmarkedIndices.clear();
-  }
-});
-
-// Prevent the default behavior of opening files when they are dragged over the document
+// Prevent the default behavior of opening files when they are dragged over the document.
 document.addEventListener("dragover", (e) => {
   e.preventDefault();
 });
 
-// Prevent the default behavior of opening files when they are dragged over the document
-document.addEventListener("drop", (e) => {
+// Prevent the default behavior of opening files when they are dragged over the document.
+document.addEventListener("drop", async (e) => {
   e.preventDefault();
+  loadImages(e);
+  closeAllModals();
 });
 
 // Copy the content of the `current-file-info` span to the clipboard.

@@ -11,6 +11,7 @@ Find the webapp under https://langenhagen.github.io/tile-viewer.
 
 ## Usage
 - Click the "open" button or press `o` to choose a file. You can select and load several files.
+- You can also drag and drop images into the app.
 - Click and drag the mouse to pan.
 - Use mouse wheel to zoom.
 - Press `0` to reset zoom to image original size.
@@ -21,7 +22,6 @@ Find the webapp under https://langenhagen.github.io/tile-viewer.
 - Click the "🔖" indicator or press `m` or `'` to toggle the current image bookmark.
 - Click the "📚" button or press `b` to toggle the bookmarks list
 - Click "?" or press `?` to toggle the help.
-
 
 ## License
 See [LICENSE](LICENSE) file.
