@@ -245,6 +245,8 @@ document.addEventListener("drop", async (e) => {
   e.preventDefault();
   loadImages(e);
   closeAllModals();
+  const fileInput = document.getElementById("file-input");
+  fileInput.value = "";
 });
 
 // Copy the content of the `current-file-info` span to the clipboard.
